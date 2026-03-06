@@ -9,16 +9,20 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 - **Added**
-  - (placeholder)
+  - `UseGraphQueryOptions` retry controls (`retryAttempts`, `retryDelayMs`).
+  - `revalidating` and `status` fields for consistent query state mapping.
+  - ADR-0003 documenting non-suspense hook decision.
+  - Hook tests for rerender, retry, and revalidation transitions.
 
 - **Changed**
-  - (placeholder)
+  - `useGraphQuery` now explicitly rejects `suspense: true`.
+  - README query-state documentation and examples.
 
 - **Fixed**
-  - (placeholder)
+  - N/A
 
 - **Security**
-  - (placeholder)
+  - N/A
 
 ## [0.1.1] - 2026-03-05
 

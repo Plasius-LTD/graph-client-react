@@ -41,6 +41,8 @@ import {
   useGraphClient,
   useGraphQuery,
   useGraphMutation,
+  type UseGraphQueryOptions,
+  type UseGraphQueryState,
   type GraphMutationClient,
 } from "@plasius/graph-client-react";
 ```
@@ -56,14 +58,21 @@ import { GraphClientProvider, useGraphQuery } from "@plasius/graph-client-react"
 const client = new GraphClient({ transport: { async fetch() { return { data: { ok: true }, version: 1 }; } } });
 
 function Profile() {
-  const { data, loading, error, refresh } = useGraphQuery({
-    requests: [{ resolver: "user.profile", key: "user:1" }],
-  });
+  const { data, loading, revalidating, error, refresh } = useGraphQuery(
+    {
+      requests: [{ resolver: "user.profile", key: "user:1" }],
+    },
+    { retryAttempts: 1, retryDelayMs: 25 },
+  );
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>{error.message}</p>;
 
-  return <button onClick={() => void refresh()}>{JSON.stringify(data?.results)}</button>;
+  return (
+    <button onClick={() => void refresh()}>
+      {revalidating ? "Refreshing..." : JSON.stringify(data?.results)}
+    </button>
+  );
 }
 
 export function App() {
@@ -87,6 +96,17 @@ npm run typecheck
 npm run test:coverage
 npm run build
 ```
+
+---
+
+## Query State Mapping
+
+- `loading`: first request with no cached hook data.
+- `revalidating`: refresh/rerender request when prior hook data exists.
+- `status`: `"loading" | "success" | "error"` terminal state for last request.
+- `error`: normalized to `Error`.
+
+Suspense is intentionally disabled in current package scope (see ADR-0003). Passing `suspense: true` to `useGraphQuery` throws.
 
 ---
 
