@@ -279,6 +279,65 @@ describe("useGraphQuery", () => {
       "GraphClientContext is missing. Wrap your tree in GraphClientProvider.",
     );
   });
+
+  it("emits query telemetry for success and failure paths", async () => {
+    const telemetry = {
+      metric: vi.fn(),
+      error: vi.fn(),
+      trace: vi.fn(),
+    };
+    const successWrapper = ({ children }: { children: React.ReactNode }) => (
+      <GraphClientProvider
+        client={{
+          query: vi.fn(async () => ({
+            partial: false,
+            stale: false,
+            generatedAtEpochMs: Date.now(),
+            results: {},
+            errors: [],
+          })),
+        } as unknown as GraphClient}
+      >
+        {children}
+      </GraphClientProvider>
+    );
+
+    const successResult = renderHook(
+      () => useGraphQuery(query, { telemetry }),
+      { wrapper: successWrapper },
+    );
+
+    await waitFor(() => {
+      expect(successResult.result.current.status).toBe("success");
+    });
+
+    const failureWrapper = ({ children }: { children: React.ReactNode }) => (
+      <GraphClientProvider
+        client={{ query: vi.fn(async () => { throw new Error("boom"); }) } as unknown as GraphClient}
+      >
+        {children}
+      </GraphClientProvider>
+    );
+
+    const failureResult = renderHook(
+      () => useGraphQuery(query, { telemetry }),
+      { wrapper: failureWrapper },
+    );
+
+    await waitFor(() => {
+      expect(failureResult.result.current.status).toBe("error");
+    });
+
+    expect(telemetry.metric).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "graph.react.query.success" }),
+    );
+    expect(telemetry.metric).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "graph.react.query.error" }),
+    );
+    expect(telemetry.error).toHaveBeenCalledWith(
+      expect.objectContaining({ code: "GRAPH_REACT_QUERY_FAILED" }),
+    );
+  });
 });
 
 describe("useGraphMutation", () => {
@@ -306,5 +365,37 @@ describe("useGraphMutation", () => {
 
     expect(result.current.error?.message).toBe("Graph mutation failed");
     expect(result.current.loading).toBe(false);
+  });
+
+  it("emits mutation telemetry for success and error", async () => {
+    const telemetry = {
+      metric: vi.fn(),
+      error: vi.fn(),
+      trace: vi.fn(),
+    };
+    const mutationClient = {
+      write: vi
+        .fn()
+        .mockResolvedValueOnce(operation)
+        .mockRejectedValueOnce(new Error("bad write")),
+    };
+    const { result } = renderHook(() => useGraphMutation(mutationClient, { telemetry }));
+
+    await act(async () => {
+      await result.current.mutate(command);
+    });
+    await act(async () => {
+      await expect(result.current.mutate(command)).rejects.toThrow("bad write");
+    });
+
+    expect(telemetry.metric).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "graph.react.mutation.success" }),
+    );
+    expect(telemetry.metric).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "graph.react.mutation.error" }),
+    );
+    expect(telemetry.error).toHaveBeenCalledWith(
+      expect.objectContaining({ code: "GRAPH_REACT_MUTATION_FAILED" }),
+    );
   });
 });

@@ -43,6 +43,7 @@ import {
   useGraphMutation,
   type UseGraphQueryOptions,
   type UseGraphQueryState,
+  type UseGraphMutationOptions,
   type GraphMutationClient,
 } from "@plasius/graph-client-react";
 ```
@@ -107,6 +108,11 @@ npm run build
 - `error`: normalized to `Error`.
 
 Suspense is intentionally disabled in current package scope (see ADR-0003). Passing `suspense: true` to `useGraphQuery` throws.
+
+Both hooks support optional `telemetry` (from `TelemetrySink`) to emit analytics signals:
+
+- Query: `graph.react.query.run`, `graph.react.query.success`, `graph.react.query.retry`, `graph.react.query.error`
+- Mutation: `graph.react.mutation.success`, `graph.react.mutation.error`
 
 ---
 
