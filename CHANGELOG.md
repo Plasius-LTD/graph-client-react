@@ -9,6 +9,20 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 - **Added**
+  - (placeholder)
+
+- **Changed**
+  - (placeholder)
+
+- **Fixed**
+  - (placeholder)
+
+- **Security**
+  - (placeholder)
+
+## [0.1.2] - 2026-03-06
+
+- **Added**
   - `UseGraphQueryOptions` retry controls (`retryAttempts`, `retryDelayMs`).
   - `revalidating` and `status` fields for consistent query state mapping.
   - Optional hook-level telemetry support for query and mutation observability.
@@ -36,3 +50,4 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
 
 
 [0.1.1]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.1
+[0.1.2]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.2
