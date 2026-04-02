@@ -5,6 +5,7 @@
     "jsx": "react-jsx",
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "NodeNext",
+    "ignoreDeprecations": "6.0",
     "types": ["node", "vitest"],
     "declaration": true,
     "sourceMap": true,
