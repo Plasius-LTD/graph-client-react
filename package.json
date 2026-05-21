@@ -53,8 +53,7 @@
     "@plasius/graph-contracts": "^0.1.4"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "^19"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
