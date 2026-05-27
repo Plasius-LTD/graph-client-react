@@ -23,6 +23,8 @@ Apache-2.0. ESM + CJS builds. TypeScript types included.
 - React 19 (`peerDependencies`)
 - `@plasius/graph-client-core`
 
+This package does not require a `react-dom` peer dependency because its public runtime surface is limited to hooks, context, and provider helpers.
+
 ---
 
 ## Installation
