@@ -12,6 +12,20 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
   - (placeholder)
 
 - **Changed**
+  - (placeholder)
+
+- **Fixed**
+  - (placeholder)
+
+- **Security**
+  - (placeholder)
+
+## [0.1.7] - 2026-06-01
+
+- **Added**
+  - (placeholder)
+
+- **Changed**
   - Removed the unused `react-dom` peer dependency so the published package contract matches the hook/context/provider runtime surface.
 
 - **Fixed**
@@ -112,3 +126,4 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
 [0.1.4]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.4
 [0.1.5]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.5
 [0.1.6]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.6
+[0.1.7]: https://github.com/Plasius-LTD/graph-client-react/releases/tag/v0.1.7
