@@ -158,7 +158,7 @@ The following repo- or directory-specific guidance from the previous local `AGEN
 This repo is `@plasius/graph-client-react`, a React integration layer for the graph client runtime.
 
 ### Setup
-- Use Node.js 22 (see `.nvmrc`) and npm.
+- Use Node.js 24 (see `.nvmrc`) and npm.
 - Install dependencies with `npm ci`.
 
 ### Common commands
