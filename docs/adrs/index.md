@@ -4,3 +4,4 @@
 - [ADR-0002: Dual ESM and CJS Distribution](./adr-0002-dual-esm-cjs-distribution.md)
 - [ADR-0003: Non-Suspense Hook Contract](./adr-0003-non-suspense-hook-contract.md)
 - [ADR-0004: React Hook Telemetry Baseline](./adr-0004-react-hook-telemetry-baseline.md)
+- [ADR-0005: Hosted OIDC Package Publication](./adr-0005-hosted-oidc-package-publication.md)
