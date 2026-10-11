@@ -51,8 +51,8 @@
   },
   "homepage": "https://github.com/Plasius-LTD/graph-client-react#readme",
   "dependencies": {
-    "@plasius/graph-client-core": "^0.1.14",
-    "@plasius/graph-contracts": "^0.1.12"
+    "@plasius/graph-client-core": "^0.1.15",
+    "@plasius/graph-contracts": "^0.1.13"
   },
   "peerDependencies": {
     "react": "^19"
