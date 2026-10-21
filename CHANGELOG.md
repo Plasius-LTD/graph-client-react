@@ -8,6 +8,8 @@ The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+- Restore trusted-push CI to the approved quarantined self-hosted Linux/X64 group with bounded jobs, no PR-head execution or hosted fallback, non-persisted checkout credentials, reproducible install and final package-manifest validation; retain exact-main hosted production OIDC publication.
+
 - **Added**
   - (placeholder)
 

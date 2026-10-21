@@ -5,3 +5,4 @@
 - [ADR-0003: Non-Suspense Hook Contract](./adr-0003-non-suspense-hook-contract.md)
 - [ADR-0004: React Hook Telemetry Baseline](./adr-0004-react-hook-telemetry-baseline.md)
 - [ADR-0005: Hosted OIDC Package Publication](./adr-0005-hosted-oidc-package-publication.md)
+- [ADR-0006: Quarantined Trusted-Push CI](./adr-0006-quarantined-push-ci.md)
