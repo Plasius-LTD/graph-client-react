@@ -130,11 +130,23 @@ Licensed under the [Apache-2.0 License](./LICENSE).
 ## Release integrity
 
 CI keeps the administrative contributor registry outside Git and npm package
-artifacts using exact, case-normalised path checks. CI runs on approved
-GitHub-hosted runners for same-repository pull requests and `main`, with
-package-manager cache finalization disabled; fork PR code is denied.
+artifacts using exact, case-normalised path checks. Both CI jobs run only for
+trusted repository pushes on the literal `Public CI - Quarantined` group with
+`[self-hosted, Linux, X64]` labels; there is no hosted fallback, PR event, callable
+workflow or caller-selected runner. Jobs have 15/10-minute limits, checkout
+credentials are not persisted, and package-manager cache finalization stays
+disabled. Clean `npm ci`, lint, types, audit, build, >=80% coverage and final
+package-manifest checks remain mandatory. Maintainer branch pushes need explicit
+reviewed workflow admission; remove temporary admissions after delivery.
 Publication uses the GitHub-hosted `production` job with Node 24 and a pinned
 npm 11.6.2 client. It is token-free and proceeds only while the prepared SHA
 is the exact `main` head after successful push-triggered CI. Do not dispatch CD
 until the npm trusted-publisher binding is verified.
+
+The stored `platform.public-artifact-integrity.enabled` flag controls staged
+public restoration, not mandatory admission. Enabled, disabled and rollback
+states all retain source/index/final-manifest and publication checks. No new
+capability or runtime/API contract is introduced. Rollback disables the affected
+workflow/channel or removes its workflow admission; it never restores the
+administrative path or changes runner class. See [ADR-0006](docs/adrs/adr-0006-quarantined-push-ci.md).
 <!-- END PLASIUS RELEASE INTEGRITY -->
